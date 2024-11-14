@@ -1,6 +1,6 @@
 import { Grid2 as Grid, Stack, Typography } from '@mui/material'
-import { NoteCard } from './NoteCard/NoteCard'
-import { NoteModal } from './NoteModal'
+import  NoteCard  from './NoteCard/NoteCard'
+import  NoteModal  from './NoteModal'
 import { useEffect, useState } from 'react';
 
 
@@ -27,11 +27,29 @@ export default function Notes() {
         setNotes((prevNotes) => [...prevNotes, note]);
     };
 
+    const updateNote = (updatedNote) => {
+        setNotes((prevNotes) =>
+            prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
+        );
+    }
+  
+    const deleteNote = (id) => {
+        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+    }
+
         return (
 
             <Stack>
+             <Stack direction="column" justifyContent="space-between" alignItems="center" px={5} py={2}>
+        <Typography variant="h1" mb={4}>Notes App</Typography>
+        <NoteModal  addNote={addNote}/>
+        </Stack>
+        <Grid container spacing={5}>
+          {notes.map((note) => (
+            <NoteCard  updateNote={updateNote} deleteNote={deleteNote} key={note.id} note={note} />            
+          ))}
+      </Grid>
 
-                
             </Stack>
         )
 
