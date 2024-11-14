@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-export default function NoteModal({ addNote }) {
+export default function NoteModal({ addNote, isAuthenticated }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -42,7 +42,8 @@ export default function NoteModal({ addNote }) {
       handleClose(); // Close the modal and reset the fields
     }
   };
-  return (
+  
+  if (isAuthenticated) return (
     <div>
       <Button variant='contained' color='primary' onClick={handleOpen}>
         Add Note
@@ -85,5 +86,8 @@ export default function NoteModal({ addNote }) {
         </DialogActions>
       </Dialog>
     </div>
+    )
+    else return (
+    <Button>Login to add notes</Button>
   );
 }

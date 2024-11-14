@@ -3,7 +3,7 @@ import NoteCard from './NoteCard/NoteCard';
 import NoteModal from './NoteModal';
 import { useEffect, useState } from 'react';
 
-export default function Notes() {
+export default function Notes({ isAuthenticated }) {
   const [notes, setNotes] = useState(() => {
     const savedNotes = localStorage.getItem('notes');
     return savedNotes ? JSON.parse(savedNotes) : [];
@@ -47,11 +47,12 @@ export default function Notes() {
         <Typography variant='h1' mb={4}>
           Notes App
         </Typography>
-        <NoteModal addNote={addNote} />
+        <NoteModal isAuthenticated={isAuthenticated} addNote={addNote} />
       </Stack>
       <Grid container spacing={5}>
         {notes.map((note) => (
           <NoteCard
+            isAuthenticated={isAuthenticated}
             updateNote={updateNote}
             deleteNote={deleteNote}
             key={note.id}
