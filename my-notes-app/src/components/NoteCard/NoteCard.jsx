@@ -6,6 +6,7 @@ import {
   Grid2 as Grid,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import  EditNoteModal  from '../EditNoteModal';
 
 export default function NoteCard({ note, deleteNote, updateNote }) {
   return (
@@ -18,6 +19,7 @@ export default function NoteCard({ note, deleteNote, updateNote }) {
           </Typography>
         </CardContent>
         <>
+          <EditNoteModal note={note} onSave={updateNote} />
           <IconButton aria-label='delete' onClick={() => deleteNote(note.id)}>
             <DeleteIcon />
           </IconButton>
